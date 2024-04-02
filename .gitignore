@@ -1,0 +1,52 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+*.iml
+*.ipr
+*.iws
+.idea
+out
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+# Generales
+*~
+build
+build.sh
+derby.log
+.DS_Store
+.gradle
+*.java.hsp
+jmx.log
+jxl.log
+run.sh
+*.sonarj
+*.sw*
+
+.mvn/
+mvnw
+mvnw.cmd
