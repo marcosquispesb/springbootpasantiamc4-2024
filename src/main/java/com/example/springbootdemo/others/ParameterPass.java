@@ -26,7 +26,7 @@ public class ParameterPass {
     }
 
     public static void passValueArrayInt(int[] values) {
-        //values[0] = 150;
+        values[0] = 150;
         values = new int[]{4, 5, 6};
         System.out.println("passValueArrayInt: " + Arrays.toString(values));
     }

@@ -1,5 +1,6 @@
 package com.example.springbootdemo.others;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +11,9 @@ import java.util.List;
  * @since 1.0
  */
 public class DataTypes {
+
     public static void aux(int nro) {
+        nro++;
         System.out.println(nro);
     }
 
@@ -25,13 +28,16 @@ public class DataTypes {
         // Wrappers: tienen metodos, aceptan valores nulos, sus clases tienen constantes
         // Boolean, Integer, Long, Double, Character
         Integer n2 = 7;
-        System.out.println(n1);
+        System.out.println(n2);
         n2 = null;
         Boolean state2 = true;
         System.out.println(state2);
 
         n2 = 6;
         aux(n2);
+        n2 = null;
+        //aux(n2); // da error
+
         // ------------------------------------------------------
         // String: es inmutable, tienen metodos, aceptan valores nulos
 
@@ -45,10 +51,11 @@ public class DataTypes {
 
         int[] array0 = new int[5];
         array0[0] = 1;
+        System.out.println(array0);
         System.out.println(Arrays.toString(array0));
 
-        int[] arrayPrim = new int[]{1, 2, 3};
-        //int[] arrayPrim = {2, 4, 6, 8, 1};
+        //int[] arrayPrim = new int[]{1, 2, 3};
+        int[] arrayPrim = {2, 4, 6, 8, 1};
         System.out.println(Arrays.toString(arrayPrim));
 
         Integer[] arrayWrap = new Integer[5];
@@ -75,9 +82,15 @@ public class DataTypes {
 
         // Arrays.asList crea una lista inmutable, es decir que tu tamaño no podra ser modificado
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5); // lista con tamaño fijo
-        list.remove(0); // NO es posible
-        list.add(0, 10); // NO es posible
+//        list.remove(0); // NO es posible
+//        list.add(0, 10); // NO es posible
         list.set(0, 100); // es posible
+        System.out.println(list);
+
+        list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5)); // lista con tamaño dinamico
+        list.remove(0); // es posible
+        list.add(3, 10); // es posible
+        list.set(0, 200); // es posible
         System.out.println(list);
     }
 }
