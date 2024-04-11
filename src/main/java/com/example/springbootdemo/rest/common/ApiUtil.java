@@ -8,8 +8,8 @@ package com.example.springbootdemo.rest.common;
  */
 public class ApiUtil {
 
-    public static final String OK_CODE = "0000";
-    public static final String ERROR_CODE = "0001";
+    public static final String OK_CODE = "OK";
+    public static final String ERROR_CODE = "NOK";
     public static final String OK_MESSAGE = "Solicitud finalizada con éxito.";
     public static final String INTERNAL_SERVER_ERROR = "Ocurrió un error inesperado, contactese con el administrador.";
 

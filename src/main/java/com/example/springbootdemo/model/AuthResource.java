@@ -53,5 +53,5 @@ public class AuthResource extends AuditableEntity implements Serializable {
 //    private List<AuthResourceAction> resourceActionList;
 
     @Transient
-    private List<AuthAction> actions;
+    private List<AuthAction> trsActions;
 }

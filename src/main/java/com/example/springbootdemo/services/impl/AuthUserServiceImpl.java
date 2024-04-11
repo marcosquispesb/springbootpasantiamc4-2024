@@ -1,13 +1,16 @@
 package com.example.springbootdemo.services.impl;
 
 import com.example.springbootdemo.model.AuthRole;
+import com.example.springbootdemo.model.AuthRoleUser;
 import com.example.springbootdemo.model.AuthUser;
 import com.example.springbootdemo.repository.AuthRoleRepository;
+import com.example.springbootdemo.repository.AuthRoleUserRepository;
 import com.example.springbootdemo.repository.AuthUserRepository;
 import com.example.springbootdemo.rest.dto.AuthUserDto;
 import com.example.springbootdemo.rest.exceptions.DataNotFoundException;
 import com.example.springbootdemo.rest.exceptions.OperationException;
 import com.example.springbootdemo.services.AuthUserService;
+import com.example.springbootdemo.utils.DBUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,8 @@ public class AuthUserServiceImpl implements AuthUserService {
     @Autowired
     private AuthRoleRepository authRoleRepository;
 
+    @Autowired
+    private AuthRoleUserRepository authRoleUserRepository;
 
     @Override
     public List<AuthUser> findAll() {
@@ -53,18 +58,13 @@ public class AuthUserServiceImpl implements AuthUserService {
     @Override
     @Transactional
     public Long save(AuthUserDto dto) {
-        // VALIDATION
-        if (dto.getRole() == null)
-            throw new OperationException("Es requerido el rol");
 
-        AuthRole role = authRoleRepository.findById(dto.getRole().getId())
-                .orElseThrow(() -> new DataNotFoundException("No se encontro el el rol a asignar"));
-
-        if (dto.getId() == null || dto.getId() <= 0) { // nuevo
-
-            AuthUser user = new AuthUser();
+        // SAVE USER
+        AuthUser user;
+        if (!DBUtil.isValidId(dto)) { // nuevo
+            user = new AuthUser();
             BeanUtils.copyProperties(dto, user);
-            user.setRole(role);
+//            user.setRole(role);
             user = authUserRepository.save(user);
             dto.setId(user.getId());
 
@@ -73,14 +73,30 @@ public class AuthUserServiceImpl implements AuthUserService {
             if (!userOpt.isPresent())
                 throw new DataNotFoundException("No se encontro el user con id: " + dto.getId());
 
-            AuthUser user = userOpt.get();
+            user = userOpt.get();
             user.setName(dto.getName());
             user.setUsername(dto.getUsername());
             user.setPassword(dto.getPassword());
             //user.setBirthDay(dto.getBirthDay());
-            user.setRole(role);
+//            user.setRole(role);
             authUserRepository.save(user);
         }
+
+        if (dto.getRoles() == null)
+            return dto.getId();
+
+        // ROL
+        for (AuthRole role : dto.getRoles()) {
+            if (role == null)
+                continue;
+
+            role = authRoleRepository.findById(role.getId())
+                    .orElseThrow(() -> new DataNotFoundException("No se encontro el rol a asignar"));
+            AuthRoleUser roleUser = AuthRoleUser.builder().authUser(user).authRol(role).build();
+            authRoleUserRepository.save(roleUser);
+            log.info("se guardo para el usuario: {}, el rol: {}", user.getName(), role.getName());
+        }
+
         return dto.getId();
     }
 

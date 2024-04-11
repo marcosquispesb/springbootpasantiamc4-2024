@@ -51,9 +51,9 @@ public class AuthUser extends AuditableEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private EntityState userStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_AUTH_ROLE", referencedColumnName = "id")
-    private AuthRole role;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "ID_AUTH_ROLE", referencedColumnName = "id")
+//    private AuthRole role;
 
 //    @OneToMany(mappedBy = "authUser", fetch = FetchType.LAZY)
 //    private List<Address> addressList;

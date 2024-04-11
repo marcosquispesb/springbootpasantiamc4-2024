@@ -3,11 +3,13 @@ package com.example.springbootdemo.rest.dto;
 import com.example.springbootdemo.enums.EntityState;
 import com.example.springbootdemo.model.AuthRole;
 import com.example.springbootdemo.model.AuthUser;
+import com.example.springbootdemo.utils.IGetID;
 import lombok.*;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * AuthUserDto
@@ -20,7 +22,7 @@ import java.util.Date;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthUserDto implements Serializable {
+public class AuthUserDto implements IGetID, Serializable {
 
     private Long id;
 
@@ -38,9 +40,10 @@ public class AuthUserDto implements Serializable {
 
     private EntityState userStatus;
 
-    private AuthRole role;
+    private List<AuthRole> roles;
 
     public AuthUserDto(AuthUser authUser) {
         BeanUtils.copyProperties(authUser, this);
     }
+
 }

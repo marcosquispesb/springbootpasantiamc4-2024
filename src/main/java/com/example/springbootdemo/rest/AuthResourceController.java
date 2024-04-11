@@ -57,16 +57,4 @@ public class AuthResourceController {
             return ResponseEntity.badRequest().body(ApiUtil.responseError500());
         }
     }
-
-    @GetMapping("/menuByRole/{roleId}")
-    public ResponseEntity<ResponseGeneric<List<AuthResourceDto>>> listMenuByRole(@PathVariable("roleId") Long roleId) {
-        log.info("menuByRole");
-        try {
-            // implementar solucion
-            return ok(ApiUtil.responseOk(new ArrayList<>()));
-        } catch (Exception e) {
-            log.error("Error inesperado", e);
-            return ResponseEntity.badRequest().body(ApiUtil.responseError500());
-        }
-    }
 }

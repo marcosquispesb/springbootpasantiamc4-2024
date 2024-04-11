@@ -1,6 +1,7 @@
 package com.example.springbootdemo.rest;
 
 import com.example.springbootdemo.rest.api.UserResponse;
+import com.example.springbootdemo.rest.common.ResponseGeneric;
 import com.example.springbootdemo.rest.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -43,12 +44,14 @@ public class DemoController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<UserResponse> user(@PathVariable(value = "id") Long id) {
-        if (id <=  0) // id invalido
-            return badRequest().body(new UserResponse(false, "Error. id invalido", null, null));
+    public ResponseEntity<ResponseGeneric<UserDto>> user(@PathVariable(value = "id") Long id) {
+        if (id <= 0) { // id invalido
+            //return badRequest().body(new UserResponse(false, "Error. id invalido", null, null));
+            return badRequest().body(new ResponseGeneric<>("OK", "Error. id invalido", null));
+        }
 
-        UserResponse userResponse = new UserResponse(true, "operacion exitosa", null
+        ResponseGeneric<UserDto> response = new ResponseGeneric<UserDto>("OK", "operacion exitosa"
                 , new UserDto("Oliver", "Atom", null, 28, null));
-        return ok(userResponse);
+        return ok(response);
     }
 }
