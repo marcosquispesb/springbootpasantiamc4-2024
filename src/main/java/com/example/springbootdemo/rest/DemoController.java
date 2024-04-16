@@ -1,13 +1,29 @@
 package com.example.springbootdemo.rest;
 
 import com.example.springbootdemo.rest.api.UserResponse;
+import com.example.springbootdemo.rest.common.ApiUtil;
 import com.example.springbootdemo.rest.common.ResponseGeneric;
 import com.example.springbootdemo.rest.dto.UserDto;
+import com.example.springbootdemo.rest.exceptions.OperationException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.websocket.server.PathParam;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import static org.springframework.http.ResponseEntity.badRequest;
 import static org.springframework.http.ResponseEntity.ok;
@@ -54,4 +70,5 @@ public class DemoController {
                 , new UserDto("Oliver", "Atom", null, 28, null));
         return ok(response);
     }
+
 }
