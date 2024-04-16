@@ -51,7 +51,7 @@ public class AuthResourceController {
         log.info("menu");
         try {
             // implementar solucion
-            return ok(ApiUtil.responseOk(new ArrayList<>()));
+            return ok(ApiUtil.responseOk(authResourceService.getMenu()));
         } catch (Exception e) {
             log.error("Error inesperado", e);
             return ResponseEntity.badRequest().body(ApiUtil.responseError500());

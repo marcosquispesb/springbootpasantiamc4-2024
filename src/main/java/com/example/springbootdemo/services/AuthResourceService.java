@@ -15,4 +15,5 @@ public interface AuthResourceService {
 
     List<AuthResource> findAll();
 
+    List<AuthResourceDto> getMenu();
 }
