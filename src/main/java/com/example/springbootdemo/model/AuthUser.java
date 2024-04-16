@@ -1,12 +1,12 @@
 package com.example.springbootdemo.model;
 
 import com.example.springbootdemo.enums.EntityState;
+import com.example.springbootdemo.enums.UserType;
 import com.example.springbootdemo.model.base.AuditableEntity;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * AuthUser
@@ -41,9 +41,6 @@ public class AuthUser extends AuditableEntity implements Serializable {
     @Column(name = "password", length = 500)
     private String password;
 
-//    @Column(name = "birth_day")
-//    private Date birthDay;
-
     @Column(name = "generated_password")
     private boolean generatedPassword;
 
@@ -51,10 +48,12 @@ public class AuthUser extends AuditableEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private EntityState userStatus;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "ID_AUTH_ROLE", referencedColumnName = "id")
-//    private AuthRole role;
+    @Column(name = "USER_TYPE")
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
 
-//    @OneToMany(mappedBy = "authUser", fetch = FetchType.LAZY)
-//    private List<Address> addressList;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_AUTH_USER", referencedColumnName = "id")
+    private AuthUser userJis;
+
 }
