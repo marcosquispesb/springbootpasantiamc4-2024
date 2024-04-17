@@ -11,6 +11,7 @@ import com.example.springbootdemo.rest.exceptions.DataNotFoundException;
 import com.example.springbootdemo.rest.exceptions.OperationException;
 import com.example.springbootdemo.services.AuthRoleService;
 import com.example.springbootdemo.services.RegisterDayService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,7 @@ import java.util.List;
  * @since 1.0
  */
 @Service
+@Slf4j
 public class RegisterDayServiceImpl implements RegisterDayService {
 
     @Autowired
@@ -68,19 +70,20 @@ public class RegisterDayServiceImpl implements RegisterDayService {
     @Override
     @Transactional
     public void save(List<RegisterDayDto> registerDayDtos) {
-        // implementar
+        for (RegisterDayDto dto : registerDayDtos) {
+            AuthUser user = authUserRepository.findByUsername(dto.getUserName());
+            if (user == null) {
+                log.info("No se encontro el usuario a asignar el horario. username: {}", dto.getUserName());
+                throw new DataNotFoundException("No se encontro el usuario a asignar el horario. username: " + dto.getUserName());
+            }
 
-        // cada registro de la lista se debe guardar
-//        AuthUser user = authUserRepository.findByUsername(userName);
-//        if (user == null)
-//            throw new DataNotFoundException("No se encontro el usuario a asignar el horario");
-//
-//        // validar que para un usuario no se registren repetidos
-//        RegisterDay entity = new RegisterDay();
-//        entity.setDateStart(dateStart);
-//        entity.setDateEnd(dateEnd);
-//        entity.setUser(user);
-//        entity = registerDayRepository.save(entity);
-//        return entity.getId();
+            // TODO validar que para un usuario no se registren repetidos
+
+            RegisterDay entity = new RegisterDay();
+            entity.setDateStart(dto.getDateStart());
+            entity.setDateEnd(dto.getDateEnd());
+            entity.setUser(user);
+            entity = registerDayRepository.save(entity);
+        }
     }
 }
