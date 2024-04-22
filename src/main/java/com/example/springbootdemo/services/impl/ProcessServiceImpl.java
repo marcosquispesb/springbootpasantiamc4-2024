@@ -51,6 +51,8 @@ public class ProcessServiceImpl implements ProcessService {
             // obtener la cantidad de minutos atrasados
             log.info(user.getName() + " " + user.getLastname());
         }
+        Integer totalAtrasadosAux = 1;
+        html = html.replace("{total_atrasados}", ""+totalAtrasadosAux);
         mailService.sendMail(transactionId, html, true);
     }
 
