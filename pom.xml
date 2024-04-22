@@ -64,6 +64,12 @@
 <!--            <version>1.6.15</version>-->
 <!--        </dependency>-->
 
+        <!-- send emails -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

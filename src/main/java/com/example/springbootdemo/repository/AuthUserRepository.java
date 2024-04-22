@@ -37,4 +37,10 @@ public interface AuthUserRepository extends JpaRepository<AuthUser, Long> {
             "   WHERE d.deleted = FALSE " +
             "   AND d.username = :username")
     AuthUser findByUsername(@Param("username") String username);
+
+    @Query("    SELECT d " +
+            "   FROM AuthUser d " +
+            "   WHERE d.deleted = FALSE " +
+            "   AND d.userJis = :userJis")
+    List<AuthUser> findByUserJis(@Param("userJis") AuthUser userJis);
 }

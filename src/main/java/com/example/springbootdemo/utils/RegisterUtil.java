@@ -17,12 +17,11 @@ public class RegisterUtil {
     private static int POS_REGISTERTYPE = 2;
 
     public static List<RegisterDayDto> convertToDtos(Scanner scanner) {
-        List<RegisterDayDto> dtos = new ArrayList<>();
-        Map<String, List<String[]>> registersMap = new HashMap<>();
-        String line;
         scanner.nextLine();
+
+        Map<String, List<String[]>> registersMap = new HashMap<>();
         while (scanner.hasNextLine()) {
-            line = scanner.nextLine().trim();
+            String line = scanner.nextLine().trim();
             String[] dataArray = line.split(Pattern.quote(","));
             if (line.isEmpty())
                 continue;
@@ -34,6 +33,7 @@ public class RegisterUtil {
             System.out.println(Arrays.toString(dataArray));
         }
 
+        List<RegisterDayDto> dtos = new ArrayList<>();
         for (Map.Entry<String, List<String[]>> entry : registersMap.entrySet()) {
             String userName = entry.getKey();
             int i = 0;

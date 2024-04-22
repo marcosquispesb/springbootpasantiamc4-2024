@@ -33,15 +33,18 @@ public class GenerateRegistersCsvUtil {
         contentList.stream().forEach(System.out::println);
         // System.out.println(contentList);
 
-        // servicios para licences  (por usuario)
-        // servicios para holidays  (para todos los usuarios)
-        // servicio para modificar los jis por usuario
-
+        // para generateRegistersByDayAllUsers:
         // 1. generar las fechas en formato "yyyy-MM-dd" dado un rango de fechas
         // 2. generar aleatoriedad en los minutos de entradas o salidas, para que haya minutos de atraso y otros
         // 3. exportar resultado en un archivo csv con el formato de los rangos de fecha
         //      ej: registros-masivo-20240402-20240417.csv
 
-        // probar envio de correo con springboot
+        // para los otros services:
+        // servicios para licences  (por usuario)
+        // servicios para holidays  (para todos los usuarios)
+        // servicio para modificar los jis por usuario
+
+        // probar envio de correo con springboot, algun ejemplo simple
+
     }
 }

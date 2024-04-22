@@ -5,7 +5,9 @@ import com.example.springbootdemo.rest.common.ApiUtil;
 import com.example.springbootdemo.rest.common.ResponseGeneric;
 import com.example.springbootdemo.rest.dto.UserDto;
 import com.example.springbootdemo.rest.exceptions.OperationException;
+import com.example.springbootdemo.services.MailService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -71,4 +73,21 @@ public class DemoController {
         return ok(response);
     }
 
+    @Autowired
+    private MailService mailService;
+
+    @PostMapping(value = "/sendMail", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity sendMail() {
+        log.info("sendMail init!!");
+        try {
+            String transactionId = ""+System.currentTimeMillis();
+            Boolean sended = mailService.sendMail(transactionId, "Contenido de prueba", false);
+            log.info("sendMail success!!");
+            return ok(sended);
+
+        } catch (Exception e) {
+            log.error("Error inesperado", e);
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }
