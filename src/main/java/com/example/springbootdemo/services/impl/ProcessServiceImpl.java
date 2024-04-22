@@ -40,7 +40,15 @@ public class ProcessServiceImpl implements ProcessService {
         AuthUser userJis = userRepository.findByUsername("bruce");
         List<AuthUser> users = userRepository.findByUserJis(userJis);
         String html = readFromResourcesThree("html\\mail.template.atrasos.content.html");
+
+        // evaluar el mes actual desde el dia 01 hasta el dia actual
+        // solo considerar las fechas de los dias entre semana LU - VI
+        //    considerar los registros holidays que caigan entre semana para excluir ciertas fechas
         for (AuthUser user : users) {
+            // por usuario considerar las licencias
+            // si un usuario no vino a trabajar parcial o total de un dia, se debe mostrar dicha informacion en {falta_hrs}
+            //      mostrar: Mar 19: 4hrs, Mar 22: 8hrs
+            // obtener la cantidad de minutos atrasados
             log.info(user.getName() + " " + user.getLastname());
         }
         mailService.sendMail(transactionId, html, true);
