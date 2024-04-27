@@ -28,9 +28,11 @@ public class RegisterDay extends AuditableEntity implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_start")
     private Date dateStart;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_end")
     private Date dateEnd;
 

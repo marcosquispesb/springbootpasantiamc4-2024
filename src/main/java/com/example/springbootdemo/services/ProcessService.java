@@ -1,5 +1,7 @@
 package com.example.springbootdemo.services;
 
+import java.util.List;
+
 /**
  * AuthRoleService
  *
@@ -8,5 +10,5 @@ package com.example.springbootdemo.services;
  */
 public interface ProcessService {
 
-    void processAtrasos();
+    void processAtrasos(List<String> jisUsernames);
 }

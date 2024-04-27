@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.ok;
@@ -33,7 +34,7 @@ public class ProcessController {
     public ResponseEntity atrasos() {
         log.info("atrasos");
         try {
-            processService.processAtrasos();
+            processService.processAtrasos(Arrays.asList("bruce"));
             return ok().build();
         } catch (Exception e) {
             log.error("Error inesperado", e);

@@ -28,6 +28,7 @@ public class Holiday extends AuditableEntity implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date")
     private Date date;
 
