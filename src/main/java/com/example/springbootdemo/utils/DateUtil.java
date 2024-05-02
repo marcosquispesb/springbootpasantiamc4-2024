@@ -50,6 +50,10 @@ public class DateUtil {
         }
     }
 
+    public static String toStringDateTime(Date valor) {
+        return toString(valor, FORMAT_DATE_TIME);
+    }
+
     public static Date formatToTime(Date date, int hour, int minute, int second, int millisecond) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);

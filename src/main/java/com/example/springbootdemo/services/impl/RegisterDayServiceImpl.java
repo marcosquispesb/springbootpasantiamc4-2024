@@ -45,7 +45,7 @@ public class RegisterDayServiceImpl implements RegisterDayService {
         authUserRepository.findByIdAndDeletedFalse(userId)
                 .orElseThrow(() -> new DataNotFoundException("No se encontro el usuario a asignar el horario"));
 
-        return registerDayRepository.findAllByUser_Id(userId);
+        return registerDayRepository.findAllByUser_IdOrderByIdAsc(userId);
     }
 
     @Override
