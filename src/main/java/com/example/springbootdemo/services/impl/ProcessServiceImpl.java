@@ -58,6 +58,7 @@ public class ProcessServiceImpl implements ProcessService {
     public void processAtrasos(List<String> jisUsernames) {
         String transactionId = "" + System.currentTimeMillis();
         //AuthUser userJis = userRepository.findByUsername("bruce");
+
         AuthUser userJis = userRepository.findByUsername(jisUsernames.get(0));
         if (userJis == null) {
             log.error("No se encontro el usuario");

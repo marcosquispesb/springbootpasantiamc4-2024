@@ -35,6 +35,7 @@ public class ProcesoAtrasosFaltasJob extends QuartzJobBean implements Interrupta
 
         // TODO Por cada ejecucion del job solo agarrar dos jis usernames
         // TODO Llamar al proceso que recibe una lista de usernames
+        //processService.processAtrasos(jisUsernames);
     }
 
     @Override

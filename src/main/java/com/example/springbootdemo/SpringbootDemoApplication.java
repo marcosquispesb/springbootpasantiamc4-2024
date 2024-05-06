@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -15,22 +17,28 @@ import java.util.Map;
 
 @Slf4j
 @SpringBootApplication
-@RequiredArgsConstructor
-public class SpringbootDemoApplication implements CommandLineRunner {
+//@RequiredArgsConstructor
+//public class SpringbootDemoApplication implements CommandLineRunner {
+public class SpringbootDemoApplication extends SpringBootServletInitializer {
 
-    private final JobService jobService;
+//    private final JobService jobService;
+
+//    @Override
+//    public void run(String... args) throws Exception {
+//        String groupName = JobConstants.GROUP_NAME;
+//
+//        String jobName = ProcesoAtrasosFaltasJob.NAME_JOB;
+//        String triggerName = ProcesoAtrasosFaltasJob.NAME_TRIGGER;
+//        Map<String, String> dataMap = new HashMap();
+//        if (!jobService.existJobName(groupName, jobName)) {
+//            jobService.scheduleCronJob(groupName, jobName, triggerName, ProcesoAtrasosFaltasJob.class, new Date()
+//                    , JobConstants.CRON_X_3_MIN, dataMap, "Job para procesar las faltas y atrasos");
+//        }
+//    }
 
     @Override
-    public void run(String... args) throws Exception {
-        String groupName = JobConstants.GROUP_NAME;
-
-        String jobName = ProcesoAtrasosFaltasJob.NAME_JOB;
-        String triggerName = ProcesoAtrasosFaltasJob.NAME_TRIGGER;
-        Map<String, String> dataMap = new HashMap();
-        if (!jobService.existJobName(groupName, jobName)) {
-            jobService.scheduleCronJob(groupName, jobName, triggerName, ProcesoAtrasosFaltasJob.class, new Date()
-                    , JobConstants.CRON_X_3_MIN, dataMap, "Job para procesar las faltas y atrasos");
-        }
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(SpringbootDemoApplication.class);
     }
 
     public static void main(String[] args) {
